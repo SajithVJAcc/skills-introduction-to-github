@@ -1,0 +1,37 @@
+name: Lesson1_Exercise3
+run-name: Run of th complex workflow
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-tatest
+    steps:
+    - uses: actions/checkout@v4
+    # Use the setup-node action to set up the Node.js environment
+    # Version 4 is the latest available version of the action
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 18
+    # Run the node command to print our desired message
+    # We don't use '|' here because we only have one command to run
+    - name: Run a node command
+      run: node -e "console.log('running from node!')"  
+  build:
+    runs-on: ubuntu-latest
+    steps:    
+    - name: Run a one-line script
+      run: echo Hello, world!
+    - name: Run a multiline script
+      run: |
+        echo Add other actions to build,
+        echo test, and deploy your project.
+     
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
