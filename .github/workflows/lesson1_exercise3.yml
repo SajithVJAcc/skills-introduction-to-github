@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-tatest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     # Use the setup-node action to set up the Node.js environment
